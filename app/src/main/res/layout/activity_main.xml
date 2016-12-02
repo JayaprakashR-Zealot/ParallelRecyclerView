@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:background="@android:color/holo_blue_light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.truedreamz.akc_parallelrecyclerview.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="8dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <ImageView
+        android:id="@+id/imageUser"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@drawable/female_avatar"
+        android:layout_below="@+id/toolbar"
+        />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/imageUser"
+        android:scrollbars="none" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/choice_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/category_recycler_view"
+        android:scrollbars="none" />
+</RelativeLayout>
