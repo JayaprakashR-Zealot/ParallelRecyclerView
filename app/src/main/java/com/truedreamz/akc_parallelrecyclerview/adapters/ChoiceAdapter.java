@@ -1,6 +1,8 @@
 package com.truedreamz.akc_parallelrecyclerview.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import com.truedreamz.akc_parallelrecyclerview.R;
 import com.truedreamz.akc_parallelrecyclerview.models.Choice;
 
 import java.util.List;
+
+import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CHOICE_SELECTED_POSITION;
 
 /**
  * Created by wisdom-JP on 12/1/2016.
@@ -50,17 +54,18 @@ public class ChoiceAdapter extends RecyclerView.Adapter<ChoiceAdapter.AKCViewHol
     @Override
     public void onBindViewHolder(AKCViewHolder holder, int position) {
         Choice choiceItem=mChoiceList.get(position);
-
-        holder.choiceIcon.setBackgroundResource(choiceItem.choice_icon);
+        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(),choiceItem.choice_icon);
+        holder.choiceIcon.setImageBitmap(icon);
+        //holder.choiceIcon.setBackgroundResource(choiceItem.choice_icon);
         // Set the view to fade in
-        setScaleAnimation(holder.itemView);
+        //setScaleAnimation(holder.itemView);
 
-        /*if(CHOICE_SELECTED_POSITION == position){
+        if(CHOICE_SELECTED_POSITION == position){
             // Here I am just highlighting the background
             holder.choiceIcon.setBackgroundColor(mContext.getResources().getColor(R.color.colorPickedItem));
         }else{
             holder.choiceIcon.setBackgroundColor(mContext.getResources().getColor(R.color.colorItembg));
-        }*/
+        }
 
     }
 

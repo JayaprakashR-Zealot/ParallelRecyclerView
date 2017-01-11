@@ -45,8 +45,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.AKCVie
     @Override
     public AKCViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View categoryItem= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_single_card,parent,false);
-
+        View categoryItem= LayoutInflater.from(parent.getContext()).inflate
+                (R.layout.list_single_card,parent,false);
         return new AKCViewHolder(categoryItem);
     }
 
@@ -61,10 +61,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.AKCVie
 
         if(CATEGORY_SELECTED_POSITION == position){
             // Here I am just highlighting the background
-            holder.categoryIcon.setBackgroundColor(mContext.getResources().getColor(R.color.colorPickedItem));
+            holder.categoryIcon.setBackgroundColor(mContext.getResources()
+                    .getColor(R.color.colorPickedItem));
         }else{
-            holder.categoryIcon.setBackgroundColor(mContext.getResources().getColor(R.color.colorItembg));
+            holder.categoryIcon.setBackgroundColor(mContext.getResources()
+                    .getColor(R.color.colorItembg));
         }
+
+        /*if(CATEGORY_SELECTED_POSITION == position){
+            // Here I am just highlighting the background
+            holder.categoryIcon.setBackgroundColor(mContext.getResources()
+                    .getColor(R.color.colorPickedItem));
+        }else{
+            holder.categoryIcon.setBackgroundResource(R.drawable.dotted_border);
+        }*/
+
     }
 
     /*private void setScaleAnimation(View view) {

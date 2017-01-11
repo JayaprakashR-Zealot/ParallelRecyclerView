@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.truedreamz.akc_parallelrecyclerview.adapters.CategoryAdapter;
@@ -17,8 +18,10 @@ import com.truedreamz.akc_parallelrecyclerview.onitemclick.RecyclerItemClickList
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.truedreamz.akc_parallelrecyclerview.R.color.colorPickedItem;
 import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_BRIDE;
 import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_CUTSHOE;
+import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_GENDER;
 import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_GOWN;
 import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_HANDBAG;
 import static com.truedreamz.akc_parallelrecyclerview.Utility.Constant.CATEGORY_HAT;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mChoiceRecyclerView;
     private ChoiceAdapter mChoiceAdapter;
     private List<Choice> mChoiceList;
-
+    private ImageView categoryFacetype;
 
 
     @Override
@@ -57,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
             toolbar.setTitle(getResources().getString(R.string.app_name));
         }
+
+        categoryFacetype=(ImageView)findViewById(R.id.categoryFacetype);
+        categoryFacetype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryFacetype.setBackgroundColor(getResources()
+                        .getColor(R.color.colorPickedItem));
+
+                CATEGORY_SELECTED_POSITION=-1;
+                CHOICE_SELECTED_POSITION=-1;
+                mCategoryAdapter.notifyDataSetChanged();
+                mChoiceAdapter.notifyDataSetChanged();
+
+                // Load date in choice recyclerview
+                pickChoice(CATEGORY_GENDER);
+            }
+        });
 
         // Initialize category list
         mCategoryList=new ArrayList<>();
@@ -75,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(MainActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+
+                        // To reset choice
+                        CHOICE_SELECTED_POSITION=-1;
+
+                        categoryFacetype.setBackgroundColor(getResources()
+                                .getColor(R.color.colorItembg));
 
                         // Updating old as well as new positions
                         mCategoryAdapter.notifyItemChanged(CATEGORY_SELECTED_POSITION);
@@ -113,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }));
 
+        // Load gender at first time
+        pickChoice(CATEGORY_GENDER);
     }
 
     private void prepareCategory(){
@@ -145,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void pickChoice(int pos){
         switch (pos){
+            case CATEGORY_GENDER:
+                prepareGender();
+                break;
             case CATEGORY_SHIRT:
                 prepareShirt();
                 break;
@@ -179,6 +210,26 @@ public class MainActivity extends AppCompatActivity {
                 prepareCutshoe();
                 break;
         }
+    }
+
+    private void prepareGender(){
+        if(mChoiceList.size()>0) mChoiceList.clear();
+
+        Choice choiceBoy=new Choice();
+        choiceBoy.choice_id=1;
+        choiceBoy.choice_name="BOY";
+        choiceBoy.choice_icon=R.drawable.boy;
+        choiceBoy.choice_description="Gender - BOY";
+        mChoiceList.add(choiceBoy);
+
+        Choice choiceGirl=new Choice();
+        choiceGirl.choice_id=2;
+        choiceGirl.choice_name="Girl";
+        choiceGirl.choice_icon=R.drawable.girl;
+        choiceGirl.choice_description="Gender - Girl";
+        mChoiceList.add(choiceGirl);
+
+        mChoiceAdapter.notifyDataSetChanged();
     }
 
 
